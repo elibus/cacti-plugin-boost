@@ -4,7 +4,7 @@ Release:    0
 Summary:	Plugin CACTI boost
 Group:		System/Monitoring
 License:	GPLv2
-Source0:	boost.tgz
+Source0:	cacti-plugins-boost-5.1.tgz
 BuildRoot:  %(mktemp -ud %{_tmppath}/}%{name}-XXXXXX)
 BuildArch:	noarch
 Requires:	cacti
