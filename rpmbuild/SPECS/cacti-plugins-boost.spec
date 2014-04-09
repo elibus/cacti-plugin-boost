@@ -1,11 +1,11 @@
 Summary:	Plugin CACTI boost
-Name:	    	cacti-plugins-boost	
-Version:	5.1
-Release:   	1.bdi6	
-Group:		System/Monitoring
 License:	GPLv2
+Name:	    	cacti-plugins-boost
+Version:	5.1
+Release:   	2.bdi6
+Group:		System/Monitoring
 Source0:	cacti-plugins-boost-%{version}.tgz
-BuildRoot:	%(mktemp -ud %{_tmppath}/}%{name}-XXXXXX)
+BuildRoot:	%(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
 BuildArch:	noarch
 Requires:	cacti
 
@@ -18,31 +18,42 @@ Plugin CACTI boost
 %build
 
 %install
+
 rm -rf %{buildroot}
-mkdir -p %{buildroot}/usr/share/cacti/plugins/boost/
-cp -p * %{buildroot}/usr/share/cacti/plugins/boost/
+mkdir -p %{buildroot}/usr/share/cacti/plugins/boost
+cp -p * %{buildroot}/usr/share/cacti/plugins/boost
 
 
 %clean
 rm -rf %{buildroot}
 
 
+%post
+
+#Create a soft link to init script
+if [ ! -f /etc/init.d/cacti_rrdsvc ]
+then
+  ln -s /usr/share/cacti/plugins/boost/cacti_rrdsvc /etc/init.d/cacti_rrdsvc
+fi
+
+chkconfig --add cacti_rrdsvc
+chkconfig cacti_rrdsvc on
+
+/etc/init.d/cacti_rrdsvc start
+
+
 %files
+%defattr(-,cacti,cacti,-)
+/usr/share/cacti/plugins/boost
 %doc /usr/share/cacti/plugins/boost/LICENSE
 %doc /usr/share/cacti/plugins/boost/README
-%defattr(0755,cacti,cacti,0755)
-/usr/share/cacti/plugins/boost/boost_server.php
-/usr/share/cacti/plugins/boost/boost_rrdupdate.php
-%defattr(-,cacti,cacti,-)
-/usr/share/cacti/plugins/boost/boost_sql_memory.sql
-/usr/share/cacti/plugins/boost/boost_sql_myisam.sql
-/usr/share/cacti/plugins/boost/cacti_boost.conf
-/usr/share/cacti/plugins/boost/cacti_rrdsvc
-/usr/share/cacti/plugins/boost/index.php
-/usr/share/cacti/plugins/boost/poller_boost.php
-/usr/share/cacti/plugins/boost/setup.php
+%attr(0755,root,root) /usr/share/cacti/plugins/boost/cacti_rrdsvc
+%attr(4755,root,root) /usr/share/cacti/plugins/boost/boost_server.php
+%attr(4755,root,root) /usr/share/cacti/plugins/boost/boost_rrdupdate.php
 
 
 %changelog
-* Tue Apr 8 2014 Pietro Moretti <MORETTI.PIETRO@ac.bankit.it> 5.1-1
+* Wed Apr 9 2014 Pietro Moretti <MORETTI.PIETRO@ac.bankit.it> 5.1 2
+- Added %post section
+* Tue Apr 8 2014 Pietro Moretti <MORETTI.PIETRO@ac.bankit.it> 5.1 1
 - Add %doc flag
