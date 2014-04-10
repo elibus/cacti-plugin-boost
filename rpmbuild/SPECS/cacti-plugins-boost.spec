@@ -2,12 +2,12 @@ Summary:	Plugin CACTI boost
 License:	GPLv2
 Name:	    	cacti-plugins-boost
 Version:	5.1
-Release:   	2.bdi6
+Release:   	3.bdi6
 Group:		System/Monitoring
 Source0:	cacti-plugins-boost-%{version}.tgz
 BuildRoot:	%(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXX)
 BuildArch:	noarch
-Requires:	cacti
+Requires:	cacti,php-process
 
 %description
 Plugin CACTI boost
@@ -52,7 +52,9 @@ chkconfig cacti_rrdsvc on
 %attr(4755,root,root) /usr/share/cacti/plugins/boost/boost_rrdupdate.php
 
 
-%changelog
+%changeloga
+* Thu Apr 10 2014 Marco Tizzoni <marco.tizzoni@bancaditalia.it> 5.1 3
+- Add php-process dependency for setuid posix support
 * Wed Apr 9 2014 Pietro Moretti <MORETTI.PIETRO@ac.bankit.it> 5.1 2
 - Added %post section
 * Tue Apr 8 2014 Pietro Moretti <MORETTI.PIETRO@ac.bankit.it> 5.1 1
