@@ -52,7 +52,7 @@ chkconfig cacti_rrdsvc on
 %attr(4755,root,root) /usr/share/cacti/plugins/boost/boost_rrdupdate.php
 
 
-%changeloga
+%changelog
 * Thu Apr 10 2014 Marco Tizzoni <marco.tizzoni@bancaditalia.it> 5.1 3
 - Add php-process dependency for setuid posix support
 * Wed Apr 9 2014 Pietro Moretti <MORETTI.PIETRO@ac.bankit.it> 5.1 2
