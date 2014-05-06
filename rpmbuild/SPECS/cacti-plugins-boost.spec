@@ -44,16 +44,15 @@ chkconfig cacti_rrdsvc on
 
 %files
 %defattr(-,cacti,cacti,-)
-/usr/share/cacti/plugins/boost
 %doc /usr/share/cacti/plugins/boost/LICENSE
 %doc /usr/share/cacti/plugins/boost/README
 %attr(0755,root,root) /usr/share/cacti/plugins/boost/cacti_rrdsvc
-%attr(4755,root,root) /usr/share/cacti/plugins/boost/boost_server.php
-%attr(4755,root,root) /usr/share/cacti/plugins/boost/boost_rrdupdate.php
-
+%attr(4755,root,root) /usr/share/cacti/plugins/boost/*.php
+%attr(4755,root,root) /usr/share/cacti/plugins/boost/*.sql
+%config /usr/share/cacti/plugins/boost/cacti_boost.conf
 
 %changelog
-* Thu Apr 10 2014 Marco Tizzoni <marco.tizzoni@bancaditalia.it> 5.1 3
+* Thu Apr 10 2014 Marco Tizzoni <marco.tizzoni@gmail.com> 5.1 3
 - Add php-process dependency for setuid posix support
 * Wed Apr 9 2014 Pietro Moretti <MORETTI.PIETRO@ac.bankit.it> 5.1 2
 - Added %post section
